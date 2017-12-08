@@ -31,17 +31,16 @@ $this->validate($request, [
 
 
 
-  $insert = new modelname;
+        $insert = new modelname;
 		
 	$insert->database_fieldname = $request->form_fieldname;
 		
     // image upload
 	
-	$imageName = time().'.'.$request->form_fieldname->getClientOriginalExtension();
-
-	$request->form_fieldname->move(public_path('foldername'), $imageName);
-
-	$insert->database_fieldname = $imageName; 
+	$image1 = $request->file('image1');
+        $name1 = time().rand(0,999999).'.'.$image1->getClientOriginalExtension();
+        $destinationPath = public_path('/image');
+        $image1->move($destinationPath, $name1);
 			
 
 	$insert->save();
