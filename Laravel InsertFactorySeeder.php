@@ -38,9 +38,10 @@ $this->validate($request, [
     // image upload
 	
 	$image1 = $request->file('image1');
-        $name1 = time().rand(0,999999).'.'.$image1->getClientOriginalExtension();
-        $destinationPath = public_path('/image');
-        $image1->move($destinationPath, $name1);
+	$name1 = time().rand(0,999999).'.'.$image1->getClientOriginalExtension();
+	$destinationPath = public_path('/image');
+	$image1->move($destinationPath, $name1);
+	$product->image1 = $name1;
 			
 
 	$insert->save();
