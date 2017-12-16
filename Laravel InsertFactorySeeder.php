@@ -196,3 +196,29 @@ public function store(request $request) {
 
     return redirect('redirecting page');
 }
+
+
+
+
+____________________________________________________
+	
+	
+Select Form Another Table | Foreach Loop | Array to String
+	
+	
+	$client = client::where('email','$email');  // select
+
+	
+
+	foreach ($client as $c) {                  // after select loop
+		$email[] = $c->email;
+	}
+
+ 
+        $email = array();			  // insert data into blank array
+
+	$email_var = implode(" ",$email);         // array to var convertion
+
+	$order->email = $email_var;               // insert data
+
+	$order->save();
