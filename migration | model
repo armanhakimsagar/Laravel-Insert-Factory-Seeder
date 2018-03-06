@@ -1,0 +1,28 @@
+* migration table create :
+
+php artisan make:migration create_researches_table
+
+
+* Now create :
+
+    public function up()
+        {
+            Schema::create('researches', function (Blueprint $table) {
+                $table->increments('id');
+                $table->string('name');
+                $table->string('email')->unique();
+                $table->string('password');
+                $table->rememberToken();
+                $table->timestamps();
+            });
+        }
+
+    for more : https://laravel.com/docs/5.6/migrations#columns
+
+
+* php artisan migrate (for create table)
+
+
+* php artisan make:model research
+
+
