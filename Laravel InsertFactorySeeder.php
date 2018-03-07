@@ -35,13 +35,23 @@ $this->validate($request, [
 		
 	$insert->database_fieldname = $request->form_fieldname;
 		
+
+
     // image upload
 	
-	$image1 = $request->file('image1');
-	$name1 = time().rand(0,999999).'.'.$image1->getClientOriginalExtension();
-	$destinationPath = public_path('/image');
-	$image1->move($destinationPath, $name1);
-	$product->image1 = $name1;
+	if($request->hasFile('file')) {
+
+	    $image = $request->file('file');
+	    // file re name
+	    $image_name = time() . '.' . $image->getClientOriginalExtension();
+	    // resize file destination path
+	    $destinationPath = public_path('project/backend/research');
+
+	    // Image upload method
+	    $image->move($destinationPath, $image_name);
+
+	}
+
 			
 
 	$insert->save();
@@ -197,6 +207,29 @@ public function store(request $request) {
     return redirect('redirecting page');
 }
 
+
+
+
+
+
+
+Resize image :
+
+$image = $request->file('profile_image');
+            // file re name
+$image_name = time() . '.' . $image->getClientOriginalExtension();
+// resize file destination path
+$destinationPath = public_path('uploads\resize_images');
+// actual path for the file
+$img = Image::make($request->file('profile_image')->getRealPath());
+$img->resize(100, null, function ($constraint) {
+$constraint->aspectRatio();
+})->save($destinationPath . '/' . $image_name);
+$destinationPath = public_path('uploads\profile_images');
+
+// Image upload method
+$image->move($destinationPath, $image_name);
+            
 
 
 
