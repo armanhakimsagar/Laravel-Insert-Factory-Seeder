@@ -1,6 +1,6 @@
 * migration table create :
 
-php artisan make:migration create_researches_table
+php artisan make:migration create_categories_table
 
 
 * Now create :
@@ -11,6 +11,10 @@ php artisan make:migration create_researches_table
                 $table->increments('id');
                 $table->string('name');
                 $table->string('email')->unique();
+                
+                $table->integer('type_id')->unsigned();
+                $table->foreign('type_id')->references('id')->on('types');
+                
                 $table->string('password');
                 $table->rememberToken();
                 $table->timestamps();
@@ -26,3 +30,11 @@ php artisan make:migration create_researches_table
 * php artisan make:model research
 
 
+
+
+Foreign key :
+
+* php artisan migrate:reset
+* $table->integer('type_id')->unsigned();                       add this line
+* php artisan migrate
+* $table->foreign('type_id')->references('id')->on('types');    add this line
