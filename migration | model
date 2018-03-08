@@ -34,7 +34,7 @@ php artisan make:migration create_categories_table
 
 Foreign key :
 
-* php artisan migrate:reset
-* $table->integer('type_id')->unsigned();                       add this line
-* php artisan migrate
-* $table->foreign('type_id')->references('id')->on('types');    add this line
+* must create dependency table before main table
+
+* $table->integer('type_id')->unsigned();
+  $table->foreign('type_id')->references('id')->on('types');
