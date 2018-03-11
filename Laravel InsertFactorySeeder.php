@@ -186,25 +186,38 @@ multiple image upload :
 
 public function store(request $request) {
 
-    $input=$request->all();
-    $images=array();
-    if($files=$request->file('images')){
-        foreach($files as $file){
-            $name=$file->getClientOriginalName();
-            $file->move('image',$name);
-            $images[]=$name;
-        }
-    }
-    /*Insert your data*/
-
-    Detail::insert( [
-        'images'=>  implode("|",$images),
-        'description' =>$input['description'],
-        //you can put other insertion here
-    ]);
+	/* ----------------------------------------
+	|| multiple video file upload & insert 
+		 ---------------------------------------- */
 
 
-    return redirect('redirecting page');
+
+
+	$videos = $request->file('videos');
+
+
+		$loop = count($videos)-1;
+
+
+	for($i=0; $i<= $loop; $i++)
+	{
+
+		$Research_file_detail = new Research_file_detail;
+
+		$video = time().".".$_FILES['videos']['name'][$i]; 
+
+		$Research_file_detail->path = $video;
+
+		$Research_file_detail->save();
+
+
+		move_uploaded_file($_FILES['videos']['tmp_name'][$i],"project/backend/research/video/".$video);
+
+
+
+
+	}
+			
 }
 
 
