@@ -268,3 +268,24 @@ Select Form Another Table | Foreach Loop | Array to String
 	$order->email = $email_var;               // insert data
 
 	$order->save();
+
+
+
+
+
+
+_________________________________________________________________________
+	
+
+Transaction lock :
+	
+ It will lock all the rows that match the criteria for writin
+	 
+$model = \App\Models\User::lockForUpdate()->find(1);
+                sleep(30);
+                $model->point = 100000;
+                $model->save();
+
+or
+	
+$user = UserInfo::where('id', '=', $this->user->id)->lockForUpdate()->first();
