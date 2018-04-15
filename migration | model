@@ -38,3 +38,13 @@ Foreign key :
 
 * $table->integer('type_id')->unsigned();
   $table->foreign('type_id')->references('id')->on('types');
+  
+  
+  
+  __________________________________________________
+  
+  
+  Migrate specific folder :
+  
+  
+  $ php artisan migrate --path=database/migrations/databank/
